@@ -1,0 +1,11 @@
+{
+    "models_root": "./available_models",
+    "models": [
+        {
+            "id": 100,
+            "model": "trial-6-model_step_1500_lr_0-9.pt",
+            "timeout": 600,
+            "opt": {}
+        }
+    ]
+}

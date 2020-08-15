@@ -27,36 +27,47 @@ class PageDownFormExample(FlaskForm):
 def index():
     form = PageDownFormExample()
     text = None
+    output = None
     language = "en-fr" #Default
     if form.validate_on_submit():
-        source = form.pagedown.data.lower()
-        source = re.sub(r"([?.!,:;¿])", r" \1 ", source)
-        source = re.sub(r'[" "]+', " ", source)
-        # language = str(request.form.get('lang'))
-        # if language == "en-fr":
+        source = form.pagedown.data
+        # source = re.sub(r"([?.!,:;¿])", r" \1 ", source)
+        # source = re.sub(r'[" "]+', " ", source)
+
+        print(source)
+
+        # arglength = len(sys.argv)
+
+        # if arglength <= 2:
+        ruleid = str(100)
+        # else:
+        #     ruleid = sys.argv[2]
+
+        # req = sys.argv[1]
+
         url = "http://127.0.0.1:5000/translator/translate"
-        # elif language == "fr-en":
-        #     url = "http://127.0.0.1:3000/translator/translate"
-        headers = {"Content-Type": "application/json"}
-        data = [{"src": source, "id": 100}]
-        response = requests.post(url, json=data, headers=headers)
-        # response = requests.get(url).json()
-        translation = response.text
-        # jsn = {}
+        data='[{"src": "' + source +'", "id": ' + ruleid +'}]'
+        # data = [{"src": source, "id": 100}]
+        output = requests.post(url, data=data).text
 
-        # print("translation", translation)
-        # jsn = json.loads(translation)
-        # print("after json")
+        myjson = json.loads(output)
 
-        with open(translation, "r") as read_file:
-           jsn = json.load(read_file)
+        # with open(output, "r") as read_file:
+        #    myjson = json.load(read_file)
+
+        input = myjson[0][0]['src']
+        output = myjson[0][0]['tgt']
+
+        print(input)
+        print(output)
+
 
         text = jsn[0][0]['tgt']
         # text = "hi"
         text = re.sub(r" ([?.!,:،؛؟¿])", r"\1", text)
     else:
         form.pagedown.data = ('This is a very simple test.')
-    return render_template('index.html', form=form, language=language, text=text)
+    return render_template('index.html', form=form, language=language, text=output)
 
 
 
