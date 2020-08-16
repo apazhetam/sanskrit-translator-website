@@ -81,7 +81,7 @@ def index():
         text = response[0][0]['tgt']
         text = re.sub(r" ([?.!,:،؛؟¿])", r"\1", text)
     else:
-        form.pagedown.data = ('namaste .')
+        form.pagedown.data = ('namaste.')
     return render_template('index.html', form=form, language=language, text=text)
 
 
