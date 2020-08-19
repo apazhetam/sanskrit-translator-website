@@ -65,19 +65,12 @@ def index():
         source = form.pagedown.data
         source = re.sub(r"([?.!,:;¿])", r" \1 ", source)
         source = re.sub(r'[" "]+', " ", source)
+        source = re.sub(r"m ", "M ", source)        #changes "aham" to "ahaM"
+
         language = str(request.form.get('lang'))
-        # if language == "en-fr":
-        # url = "http://127.0.0.1:5000/translator/translate"
-        # elif language == "fr-en":
-        #     url = "http://127.0.0.1:3000/translator/translate"
-        # headers = {"Content-Type": "application/json"}
         data = [{"src": source, "id": 100}]
-        # response = requests.post(url, json=data, headers=headers)
         response = translate(data)
         t = type(response)
-        # translation = response.text
-        # jsn = json.loads(response)
-        # text = jsn[0][0]['tgt']
         text = response[0][0]['tgt']
         text = re.sub(r" ([?.!,:،؛؟¿])", r"\1", text)
     else:
