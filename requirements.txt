@@ -17,7 +17,7 @@ PyYAML==5.3.1
 requests==2.24.0
 sentencepiece==0.1.91
 six==1.15.0
-http://download.pytorch.org/whl/cpu/torch-1.6.0%2Bcpu-cp36-cp36m-win_amd64.whl
+https://download.pytorch.org/whl/torch_stable.html/cpu/torch-1.6.0%2Bcpu-cp36-cp36m-win_amd64.whl
 https://download.pytorch.org/whl/cpu/torchvision-0.4.2%2Bcpu-cp37-cp37m-linux_x86_64.whl
 torchtext==0.6.0
 tqdm==4.48.2
